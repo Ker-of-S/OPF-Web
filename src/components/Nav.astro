@@ -28,7 +28,16 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   <div id="nav-links">
     {
       navLinks.map(({ link, label }) => (
-        <a href={link} class:list={[{ active: currentPath === link }]}>
+        <a
+          href={link}
+          class:list={[
+            {
+              // se muestra activo si el link es o empieza con algunos de los navLinks
+              active:
+                currentPath === link || currentPath.startsWith(link + "/"),
+            },
+          ]}
+        >
           {label}
         </a>
       ))
