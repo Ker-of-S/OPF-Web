@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Seccion from "../../components/Seccion.astro";
+import Tarjeta from "../../components/Tarjeta.astro";
+
+export const titulo = "Cursos de Preparacion";
+export const descripcion =
+  "Aqui estan registrados las clases que hemos impartido a los participantes.";
+---
+
+<Layout>
+  <main>
+    <h1 class="motion-fadein">{titulo}</h1>
+    <Seccion titulo="¿Más clases?" acento="verde">
+      <p>
+        Si participaste en la ultima edición de la Olimpiada Potosína de Física
+        recibirás <b>clases preparatorias</b> hacia la olimpiada nacional de física.
+      </p>
+      <p>
+        Si no fuiste de los seleccionados o estas <b>interesado en participar</b
+        > y estas revisando los recursos: {descripcion}
+      </p>
+    </Seccion>
+    <div class="flex">
+      <a href="https://www.youtube.com/@olimpiadadefisicaslp4634">
+        <Tarjeta titulo="Youtube" acento="_rojoYt">
+          Revisa nuestro canal de Youtube donde compartimos las grabaciones de
+          los cursos.
+        </Tarjeta>
+      </a>
+
+      <br />
+
+      <a
+        href="https://drive.google.com/drive/folders/0B4fzg4Xe1bTAM2FzcWxOS0V1TTg?resourcekey=0-o8HY4khCkZBCuoz3IOwMFA&usp=drive_link"
+      >
+        <Tarjeta titulo="Drive" acento="dorado" colorTitulo="negro">
+          Accede a nuestra carpeta donde te compartimos todos los documentos
+          durante las clases.
+        </Tarjeta>
+      </a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  a {
+    /*
+     * como todo esta dentro de a le quitamos el color y underline de a tag 
+     * en el futuro deberíamos actualizar <Tarjeta> o repensar el pensar el formato de esta pagina
+     * */
+    color: var(--colorTexto);
+    text-decoration: none;
+  }
+
+  h1 {
+    align-self: center;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    max-width: 50em;
+    margin: 0 auto;
+  }
+
+  main div {
+    display: flex;
+    padding: 1rem;
+    gap: 20px;
+  }
+</style>

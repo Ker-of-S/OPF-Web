@@ -71,6 +71,25 @@ const { formulas = true, title = "OPF" } = Astro.props;
       z-index: 1;
     }
 
+    /* TODO!!!
+     * Utiliza una clase .a en lugar de 'a' tag para evitar que 
+     * este estilo se aplique en link donde no queremos.
+     * Sin embargo esto debe de ser implementado de mejor forma.
+     * */
+    /* Estilo de links:
+     * - azul de la paleta
+     * - sin subrayado
+     * */
+    .a {
+      color: var(--azul);
+      text-decoration: none;
+    }
+
+    /* Subrayado cuando pasa el raton */
+    .a:hover {
+      text-decoration: underline;
+    }
+
     ul {
       list-style: none;
       padding: 0;
