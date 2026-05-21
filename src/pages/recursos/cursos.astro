@@ -9,38 +9,63 @@ export const descripcion =
 ---
 
 <Layout>
-  <div class="container">
+  <main>
     <h1 class="motion-fadein">{titulo}</h1>
-  </div>
-  <Seccion titulo="¿Mas clases?" acento="verde">
-    <p>
-      Si participaste en la ultima edicion de la olimpiada potosina de fisica
-      recibiras <b>clases preparatorias</b> hacia la olimpiada nacional de fisica.
-    </p>
-    <p>
-    Si no fuiste de los seleccionados o estas <b>interesado en participar</b> y estas
-      revisando los recursos: {descripcion}
-    </p>
-  </Seccion>
-  
-  <Tarjeta titulo="Youtube" acento="_rojoYt">
-    Revisa nuestro canal de Youtube donde compartimos las grabaciones de los cursos.
-  </Tarjeta>
+    <Seccion titulo="¿Mas clases?" acento="verde">
+      <p>
+        Si participaste en la ultima edicion de la olimpiada potosina de fisica
+        recibiras <b>clases preparatorias</b> hacia la olimpiada nacional de fisica.
+      </p>
+      <p>
+        Si no fuiste de los seleccionados o estas <b>interesado en participar</b
+        > y estas revisando los recursos: {descripcion}
+      </p>
+    </Seccion>
+    <div class="flex">
+      <a href="https://www.youtube.com/@olimpiadadefisicaslp4634">
+      <Tarjeta titulo="Youtube" acento="_rojoYt">
+        Revisa nuestro canal de Youtube donde compartimos las grabaciones de los
+        cursos.
+      </Tarjeta>
+      </a>
 
-  <br>
+      <br />
 
-  <Tarjeta titulo="Drive" acento="dorado" colorTitulo="negro">
-    Accede a nuestra carpeta donde te compartimos todos los documentos durante las clases.
-  </Tarjeta>
+      <a href="https://drive.google.com/drive/folders/0B4fzg4Xe1bTAM2FzcWxOS0V1TTg?resourcekey=0-o8HY4khCkZBCuoz3IOwMFA&usp=drive_link">
+      <Tarjeta titulo="Drive" acento="dorado" colorTitulo="negro">
+        Accede a nuestra carpeta donde te compartimos todos los documentos
+        durante las clases.
+      </Tarjeta>
+      </a>
 
+    </div>
+  </main>
 </Layout>
 
 <style>
-  .container {
+  a {
+    /*
+     * como todo esta dentro de a le quitamos el color y underline de a tag 
+     * en el futuro deberiamos actualizar <Tarjeta> o repensar el pensar el formato de esta pagina
+     * */
+    color: var(--colorTexto);
+    text-decoration: none;
+  }
+
+  h1 {
+    align-self: center;
+  }
+
+  main {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    max-width: 800px;
+    max-width: 50em;
     margin: 0 auto;
+  }
+
+  main div {
+    display: flex;
+    padding: 1rem;
+    gap: 20px;
   }
 </style>
