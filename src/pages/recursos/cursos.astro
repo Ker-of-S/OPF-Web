@@ -1,0 +1,46 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Seccion from "../../components/Seccion.astro";
+import Tarjeta from "../../components/Tarjeta.astro";
+
+export const titulo = "Cursos de Preparacion";
+export const descripcion =
+  "Aqui estan registrados las clases que hemos impartido a los participantes.";
+---
+
+<Layout>
+  <div class="container">
+    <h1 class="motion-fadein">{titulo}</h1>
+  </div>
+  <Seccion titulo="¿Mas clases?" acento="verde">
+    <p>
+      Si participaste en la ultima edicion de la olimpiada potosina de fisica
+      recibiras <b>clases preparatorias</b> hacia la olimpiada nacional de fisica.
+    </p>
+    <p>
+    Si no fuiste de los seleccionados o estas <b>interesado en participar</b> y estas
+      revisando los recursos: {descripcion}
+    </p>
+  </Seccion>
+  
+  <Tarjeta titulo="Youtube" acento="_rojoYt">
+    Revisa nuestro canal de Youtube donde compartimos las grabaciones de los cursos.
+  </Tarjeta>
+
+  <br>
+
+  <Tarjeta titulo="Drive" acento="dorado" colorTitulo="negro">
+    Accede a nuestra carpeta donde te compartimos todos los documentos durante las clases.
+  </Tarjeta>
+
+</Layout>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>

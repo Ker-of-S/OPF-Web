@@ -1,5 +1,6 @@
 export const colores = {
   naranja: "#B85025",
+  _rojoYt: "#B2071D",
   verde: "#2A5C35",
   azulUaslp: "#23498C",
   azul: "#1F6BED",
