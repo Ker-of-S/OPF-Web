@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Seccion from "../../components/Seccion.astro";
 import Tarjeta from "../../components/Tarjeta.astro";
 
 interface Recurso {
@@ -14,7 +15,7 @@ const todosAstros = Object.entries(
 );
 
 // los archivos astros que tengan lo necesario convertidos en recursos interface
-const todosRecursos = todosAstros.flatMap(([ruta, archivo]) => {
+const recursosAutom = todosAstros.flatMap(([ruta, archivo]) => {
   if (!archivo.titulo || !archivo.descripcion) return []; // omite los que no cumplan con lo necesario
   return [
     {
@@ -24,32 +25,100 @@ const todosRecursos = todosAstros.flatMap(([ruta, archivo]) => {
     },
   ];
 });
+
+// Unimos los recursos automáticos con los manuales que queramos agregar
+const todosRecursos = [
+  ...recursosAutom,
+  {
+    // Aquí podríamos agregar recursos manualmente si es necesario
+    ruta: "/recursos/temario",
+    titulo: "Temario",
+    descripcion: "Consulta el temario para la preparación de la olimpiada.",
+  },
+];
 ---
 
 <Layout>
-  {
-    todosRecursos.map(({ ruta, titulo, descripcion }) => (
-      <a href={ruta} class="">
-        <Tarjeta>
-          <h2>{titulo}</h2>
-          <p>{descripcion}</p>
-        </Tarjeta>
-      </a>
-    ))
-  }
+  <div class="contenedor-recursos">
+    <h1 class="titulo-seccion">Recursos</h1>
+
+    <section class="carrusel">
+      {
+        todosRecursos.map(({ ruta, titulo, descripcion }) => (
+          <a href={ruta} class="carrusel-item">
+            <Tarjeta>
+              <h2>{titulo}</h2>
+              <p>{descripcion}</p>
+            </Tarjeta>
+          </a>
+        ))
+      }
+    </section>
+  </div>
 </Layout>
 
 <style>
-  * {
-    /*
-     * como todo esta dentro de a le quitamos el color y underline de a tag 
-     * en el futuro deberiamos actualizar <Tarjeta> o repensar el pensar el formato de esta pagina
-     * */
-    color: var(--colorTexto);
-    text-decoration: none;
+  .contenedor-recursos {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
   }
 
-  a {
-    padding: 2em;
+  .titulo-seccion {
+    color: var(--colorTexto);
+    margin-bottom: 1.5rem;
+  }
+
+  .carrusel {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .carrusel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carrusel-item {
+    flex: 0 0 100%;
+    max-width: 350px;
+    scroll-snap-align: center;
+
+    text-decoration: none;
+    color: var(--colorTexto);
+    transition: transform 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .carrusel-item :global(> *) {
+    flex: 1;
+    height: 100%;
+  }
+
+  .carrusel-item:hover {
+    transform: translateY(-5px);
+  }
+
+  @media (min-width: 768px) {
+    .carrusel-item {
+      flex: 0 0 calc(50% - 1.5rem);
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carrusel-item {
+      flex: 0 0 calc(33.333% - 1.5rem);
+    }
   }
 </style>

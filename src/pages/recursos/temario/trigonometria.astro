@@ -1,0 +1,39 @@
+---
+export const titulo = "Trigonometría";
+export const descripcion =
+  "Estudio de las relaciones entre los lados y ángulos de los triángulos.";
+export const subtemas = [
+  "Triángulos Rectángulos",
+  "Razones Trigonométricas",
+  "Identidades Pitagóricas",
+  "Círculo Unitario y Radianes",
+  "Leyes de Senos y Cosenos",
+];
+import Layout from "../../../layouts/Layout.astro";
+import Seccion from "../../../components/Seccion.astro";
+---
+
+<Layout>
+  <main class="contenedor-tema">
+    <h1>{titulo}</h1>
+    <p class="intro">{descripcion}</p>
+
+    <Seccion titulo="Triangulos Rectángulos" />
+
+    <Seccion titulo="Razones Trigonométricas" />
+
+    <Seccion titulo="Identidades Pitagóricas" />
+
+    <Seccion titulo="Círculo Unitario y Radianes" />
+
+    <Seccion titulo="Leyes de Senos y Cosenos" />
+  </main>
+</Layout>
+
+<style>
+  .contenedor-tema {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>

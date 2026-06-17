@@ -1,0 +1,141 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Seccion from "../../../components/Seccion.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import { subtemas } from "./termodinámica.astro";
+
+export const titulo = "Temario";
+export const descripcion =
+  "Consulta el temario para la preparación de la olimpiada.";
+
+interface Recurso {
+  ruta: string;
+  titulo: string;
+  descripcion: string;
+}
+
+// 1. Buscamos todos los archivos .astro en esta carpeta
+const todosAstros = Object.entries(
+  import.meta.glob("./*.astro", { eager: true }),
+);
+
+// 2. Filtramos y armamos la lista de temas
+const temas = todosAstros.flatMap(([ruta, archivo]) => {
+  if (ruta.includes("index.astro")) return [];
+
+  // Omitimos si a algún archivo se le olvidó poner titulo o descripcion
+  if (!archivo.titulo || !archivo.descripcion) return [];
+
+  return [
+    {
+      // Limpiamos la ruta
+      ruta: "/recursos/temario" + ruta.replace(".", "").replace(".astro", ""),
+      titulo: archivo.titulo,
+      descripcion: archivo.descripcion,
+      subtemas: archivo.subtemas || [],
+    },
+  ];
+});
+---
+
+<Layout formulas={true}>
+  <main class="contenedor-temario">
+    <header class="cabecera motion-fadein">
+      <h1>{titulo}</h1>
+      <p>{descripcion}</p>
+    </header>
+
+    <section class="grid-temas motion-fadein">
+      {
+        temas.map((bloque) => (
+          <a href={bloque.ruta} class="tema-link">
+            <Tarjeta>
+              <div class="cabecera-tarjeta">
+                <h2>{bloque.titulo}</h2>
+              </div>
+              <p class="descripcion-tema">{bloque.descripcion}</p>
+
+              <ul>
+                {bloque.subtemas.map((subtema: string) => (
+                  <li>{subtema}</li>
+                ))}
+              </ul>
+            </Tarjeta>
+          </a>
+        ))
+      }
+    </section>
+
+    <div class="descarga">
+      <Seccion titulo="¿Prefieres estudiarlo sin conexión?">
+        <p>Descarga el documento completo</p>
+      </Seccion>
+      <Etiqueta href="/Temario.pdf" colorFondo="naranja"
+        >Descargar Temario en PDF &darr;</Etiqueta
+      >
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .cabecera {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    color: var(--azulUaslp);
+  }
+
+  .cabecera p {
+    color: var(--naranja);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem auto;
+  }
+
+  .tema-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+  }
+
+  .tema-link > * {
+    flex-grow: 1;
+  }
+
+  .grid-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 6rem;
+  }
+
+  .descripcion-tema {
+    color: var(--negro);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gris);
+    font-style: italic;
+  }
+
+  .descarga {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  /* Responsive */
+  @media (max-width: 780px) {
+    .descarga {
+      flex-direction: column;
+    }
+  }
+</style>
