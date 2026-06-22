@@ -39,14 +39,14 @@ const todosRecursos = [
 ---
 
 <Layout>
-  <div class="contenedor-recursos">
-    <h1 class="titulo-seccion">Recursos</h1>
+  <div>
+    <h1>Recursos</h1>
 
-    <section class="carrusel">
+    <section>
       {
         todosRecursos.map(({ ruta, titulo, descripcion }) => (
-          <a href={ruta} class="carrusel-item">
-            <Tarjeta>
+          <a href={ruta}>
+            <Tarjeta hover>
               <h2>{titulo}</h2>
               <p>{descripcion}</p>
             </Tarjeta>

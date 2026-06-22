@@ -7,6 +7,7 @@ interface Props {
   colorFondo?: Color;
   colorTitulo?: Color;
   titulo?: string;
+  hover?: boolean;
   class: String;
 }
 
@@ -16,11 +17,14 @@ const {
   colorTitulo = "blanco",
   titulo,
   alineado = "inherit",
+  hover = false,
   class: className,
 } = Astro.props;
 ---
 
-<div class:list={[className, { resaltada: titulo }]}>
+<div
+  class:list={[className, { resaltada: titulo, "motion-card-hover": hover }]}
+>
   {titulo && <h3>{titulo}</h3>}
   <slot />
 </div>

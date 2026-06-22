@@ -41,6 +41,22 @@ const { formulas = true, title = "OPF" } = Astro.props;
       return () => animate(element, { scale: 1 });
     });
 
+    // Hover sutil para tarjetas: escala leve + sombra
+    hover(".motion-card-hover", (element) => {
+      animate(
+        element,
+        { scale: 1.03, boxShadow: "0 12px 24px rgba(0, 0, 0, 0.15)" },
+        { duration: 0.2, easing: "ease-out" },
+      );
+
+      return () =>
+        animate(
+          element,
+          { scale: 1, boxShadow: "0 4px 10px rgba(0, 0, 0, 0.03)" },
+          { duration: 0.2, easing: "ease-out" },
+        );
+    });
+
     inView(".motion-fadein", (element) => {
       animate(
         element,
@@ -62,6 +78,12 @@ const { formulas = true, title = "OPF" } = Astro.props;
 
     .motion-hover {
       display: inline-block;
+    }
+
+    .motion-card-hover {
+      display: block;
+      transform-origin: center;
+      will-change: transform, box-shadow;
     }
 
     main {
