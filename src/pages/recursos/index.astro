@@ -58,67 +58,59 @@ const todosRecursos = [
 </Layout>
 
 <style>
-  .contenedor-recursos {
+  div {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
   }
 
-  .titulo-seccion {
+  h1 {
     color: var(--colorTexto);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
-  .carrusel {
+  section {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     overflow-x: auto;
-    padding-bottom: 2rem;
-
+    overscroll-behavior-x: contain;
+    padding: 1rem 1.5rem 2.5rem;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-
-    -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  .carrusel::-webkit-scrollbar {
+  section::-webkit-scrollbar {
     display: none;
   }
 
-  .carrusel-item {
-    flex: 0 0 100%;
+  a {
+    flex: 0 0 85%;
     max-width: 350px;
     scroll-snap-align: center;
-
     text-decoration: none;
     color: var(--colorTexto);
-    transition: transform 0.3s ease;
-
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
   }
 
-  .carrusel-item :global(> *) {
+  a :global(> *) {
     flex: 1;
-    height: 100%;
   }
 
-  .carrusel-item:hover {
-    transform: translateY(-5px);
-  }
+  @media (min-width: 640px) {
+    div {
+      padding: 2rem;
+    }
 
-  @media (min-width: 768px) {
-    .carrusel-item {
-      flex: 0 0 calc(50% - 1.5rem);
+    a {
+      flex-basis: calc(50% - 0.5rem);
       scroll-snap-align: start;
     }
   }
 
   @media (min-width: 1024px) {
-    .carrusel-item {
-      flex: 0 0 calc(33.333% - 1.5rem);
+    a {
+      flex-basis: calc(33.333% - 0.667rem);
     }
   }
 </style>
