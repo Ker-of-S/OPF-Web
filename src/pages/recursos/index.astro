@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Seccion from "../../components/Seccion.astro";
 import Tarjeta from "../../components/Tarjeta.astro";
 
 interface Recurso {
@@ -14,7 +15,7 @@ const todosAstros = Object.entries(
 );
 
 // los archivos astros que tengan lo necesario convertidos en recursos interface
-const todosRecursos = todosAstros.flatMap(([ruta, archivo]) => {
+const recursosAutom = todosAstros.flatMap(([ruta, archivo]) => {
   if (!archivo.titulo || !archivo.descripcion) return []; // omite los que no cumplan con lo necesario
   return [
     {
@@ -24,32 +25,100 @@ const todosRecursos = todosAstros.flatMap(([ruta, archivo]) => {
     },
   ];
 });
+
+// Unimos los recursos automáticos con los manuales que queramos agregar
+const todosRecursos = [
+  ...recursosAutom,
+  {
+    // Aquí podríamos agregar recursos manualmente si es necesario
+    ruta: "/recursos/temario",
+    titulo: "Temario",
+    descripcion: "Consulta el temario para la preparación de la olimpiada.",
+  },
+];
 ---
 
 <Layout>
-  {
-    todosRecursos.map(({ ruta, titulo, descripcion }) => (
-      <a href={ruta} class="">
-        <Tarjeta>
-          <h2>{titulo}</h2>
-          <p>{descripcion}</p>
-        </Tarjeta>
-      </a>
-    ))
-  }
+  <div>
+    <h1>Recursos</h1>
+
+    <section>
+      {
+        todosRecursos.map(({ ruta, titulo, descripcion }) => (
+          <a href={ruta}>
+            <Tarjeta hover>
+              <h2>{titulo}</h2>
+              <p>{descripcion}</p>
+            </Tarjeta>
+          </a>
+        ))
+      }
+    </section>
+  </div>
 </Layout>
 
 <style>
-  * {
-    /*
-     * como todo esta dentro de a le quitamos el color y underline de a tag 
-     * en el futuro deberiamos actualizar <Tarjeta> o repensar el pensar el formato de esta pagina
-     * */
+  div {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  h1 {
     color: var(--colorTexto);
-    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+
+  section {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 1rem 1.5rem 2.5rem;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+  }
+
+  section::-webkit-scrollbar {
+    display: none;
   }
 
   a {
-    padding: 2em;
+    flex: 0 0 85%;
+    max-width: 350px;
+    scroll-snap-align: center;
+    text-decoration: none;
+    color: var(--colorTexto);
+    display: flex;
+  }
+
+  a :global(> *) {
+    flex: 1;
+  }
+
+  @media (min-width: 640px) {
+    div {
+      padding: 2rem;
+    }
+
+    a {
+      flex-basis: calc(50% - 0.5rem);
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    a {
+      flex-basis: calc(33.333% - 0.667rem);
+    }
   }
 </style>

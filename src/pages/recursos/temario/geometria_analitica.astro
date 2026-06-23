@@ -1,0 +1,36 @@
+---
+export const titulo = "Geometría analítica";
+export const descripcion =
+  "Líneas, parábolas y todas las figuras geométricas descritas a través de ecuaciones algebraicas.";
+export const subtemas = [
+  "El Plano y Parejas Ordenadas",
+  "Distancia entre dos puntos",
+  "La Recta",
+  "Las Cónicas (Circunferencia, Elipse, Parábola, Hipérbola)",
+];
+import Layout from "../../../layouts/Layout.astro";
+import Seccion from "../../../components/Seccion.astro";
+---
+
+<Layout>
+  <main class="contenedor-tema">
+    <h1>{titulo}</h1>
+    <p class="intro">{descripcion}</p>
+
+    <Seccion titulo="El Plano y Parejas Ordenadas" />
+
+    <Seccion titulo="Distancia entre dos puntos" />
+
+    <Seccion titulo="La Recta" />
+
+    <Seccion titulo="Cónicas (Circunferencia, Elipse, Parábola, Hipérbola)" />
+  </main>
+</Layout>
+
+<style>
+  .contenedor-tema {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>
