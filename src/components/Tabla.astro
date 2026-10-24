@@ -17,7 +17,15 @@ const { encabezados, filas, acento = "verde" } = Astro.props;
       <tr>{encabezados.map((encabezado) => <th>{encabezado}</th>)}</tr>
     </thead>
     <tbody>
-      {filas.map((fila) => <tr>{fila.map((celda) => <td>{celda}</td>)}</tr>)}
+      {
+        filas.map((fila) => (
+          <tr>
+            {fila.map((celda) => (
+              <td>{celda}</td>
+            ))}
+          </tr>
+        ))
+      }
     </tbody>
   </table>
 </div>
