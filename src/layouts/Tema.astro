@@ -2,6 +2,7 @@
 import Formulas from "../components/Formulas.astro";
 import Layout from "../layouts/Layout.astro";
 import Etiqueta from "../components/Etiqueta.astro";
+import Seccion from "../components/Seccion.astro";
 
 interface Props {
   formulas?: boolean;
@@ -46,13 +47,25 @@ const downloadUrl = (id: string) =>
   }
   {formulas && <Formulas />}
   <main class="contenedor-tema">
-  <slot />
+    <slot />
+
+    <div class="descargas">
+      <Seccion acento="azul" titulo="Material descargable">
+        <p>Practica lo aprendido con el material de este tema.</p>
+      </Seccion>
+      <Etiqueta href={downloadUrl(InfografiaId)} colorFondo="naranja">
+        Infografía
+      </Etiqueta>
+      <div class="links">
+        <Etiqueta href={downloadUrl(ProblemasId)} colorFondo="azul">
+          Problemas
+        </Etiqueta>
+        <Etiqueta href={downloadUrl(SolucionarioId)} colorFondo="verde">
+          Problemas resueltos
+        </Etiqueta>
+      </div>
+    </div>
   </main>
-  <Etiqueta href={downloadUrl(InfografiaId)}>Descarga la Infografia</Etiqueta>
-  <Etiqueta href={downloadUrl(ProblemasId)}>Descarga Problemas</Etiqueta>
-  <Etiqueta href={downloadUrl(SolucionarioId)}
-    >Descarga Problemas Resueltos</Etiqueta
-  >
 </Layout>
 
 <style>
@@ -60,5 +73,27 @@ const downloadUrl = (id: string) =>
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
+  }
+
+  .descargas {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .descargas p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .descargas a {
+    white-space: nowrap;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 </style>
