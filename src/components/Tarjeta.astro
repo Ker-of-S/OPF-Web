@@ -9,6 +9,8 @@ interface Props {
   titulo?: string;
   hover?: boolean;
   class: String;
+  href?: string;
+  prefetch?: boolean;
 }
 
 const {
@@ -19,14 +21,23 @@ const {
   alineado = "inherit",
   hover = false,
   class: className,
+  href,
+  prefetch,
 } = Astro.props;
+
+const Tag = href ? "a" : "p";
 ---
 
 <div
   class:list={[className, { resaltada: titulo, "motion-card-hover": hover }]}
 >
-  {titulo && <h3>{titulo}</h3>}
-  <slot />
+  <Tag
+    href={href || undefined}
+    data-astro-prefetch={prefetch ? "hover" : "false"}
+  >
+    {titulo && <h3>{titulo}</h3>}
+    <slot />
+  </Tag>
 </div>
 
 <style
@@ -46,6 +57,10 @@ const {
     text-align: var(--alineado);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     position: relative;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 
   .resaltada {
