@@ -1,0 +1,99 @@
+---
+import Formulas from "../components/Formulas.astro";
+import Layout from "../layouts/Layout.astro";
+import Etiqueta from "../components/Etiqueta.astro";
+import Seccion from "../components/Seccion.astro";
+
+interface Props {
+  formulas?: boolean;
+  latex?: boolean;
+  InfografiaId: string;
+  ProblemasId: string;
+  SolucionarioId: string;
+}
+const {
+  formulas = true,
+  latex = false,
+  InfografiaId,
+  ProblemasId,
+  SolucionarioId,
+} = Astro.props;
+
+const downloadUrl = (id: string) =>
+  `https://drive.google.com/uc?export=download&id=${id}`;
+---
+
+<Layout>
+  {
+    latex && (
+      <>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+        />
+        <script
+          is:inline
+          defer
+          src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+        />
+        <script
+          is:inline
+          defer
+          src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"
+        />
+      </>
+    )
+  }
+  {formulas && <Formulas />}
+  <main class="contenedor-tema">
+    <slot />
+
+    <div class="descargas">
+      <Seccion acento="azul" titulo="Material descargable">
+        <p>Practica lo aprendido con el material de este tema.</p>
+      </Seccion>
+      <Etiqueta href={downloadUrl(InfografiaId)} colorFondo="naranja">
+        Infografía
+      </Etiqueta>
+      <div class="links">
+        <Etiqueta href={downloadUrl(ProblemasId)} colorFondo="azul">
+          Problemas
+        </Etiqueta>
+        <Etiqueta href={downloadUrl(SolucionarioId)} colorFondo="verde">
+          Problemas resueltos
+        </Etiqueta>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .contenedor-tema {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .descargas {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .descargas p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .descargas a {
+    white-space: nowrap;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>

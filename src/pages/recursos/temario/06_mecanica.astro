@@ -1,0 +1,190 @@
+---
+export const titulo = "Mecánica";
+export const descripcion = "El estudio del movimiento.";
+export const subtemas = [
+  "Posición, Velocidad y Aceleración",
+  "MRU y MRUA",
+  "Tiro Parabólico",
+  "Leyes de Newton",
+];
+export const disponible = true;
+import Tema from "../../../layouts/Tema.astro";
+import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const InfografiaId = "1-oGQ2pwr0VyijxcoxyRTd3wub2_wtFmA";
+const ProblemasId = "1Lr2re1lmfrP_CAJbQXN4kqP_qh2-lJnS";
+const SolucionarioId = "11Lz_g6DlE-QyngqTWllr4CQyseq_njzP";
+---
+
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
+
+  <Seccion titulo="Definiciones" acento="dorado">
+    <p>
+      <strong>Movimiento</strong>: cambio aparente de la posición de un cuerpo
+      respecto al tiempo. <strong>Punto material / partícula</strong>: cuerpo
+      sin dimensiones.
+    </p>
+  </Seccion>
+
+  <p>
+    Conocer el movimiento de un cuerpo se refiere a hallar su posición como una
+    función del tiempo, $r = f(t)$. Con esto podemos determinar la posición en
+    cualquier instante, por ejemplo:
+  </p>
+  <Tabla
+    acento="dorado"
+    encabezados={["$t$", "$r$"]}
+    filas={[
+      [0, 1],
+      [1, 20],
+      [2, 15],
+      [3, -7],
+      [4, 40],
+    ]}
+  />
+  <p>A partir de la posición definimos tres cantidades:</p>
+  <Tarjeta acento="dorado">
+    <strong>Desplazamiento</strong>: cambio de posición en un intervalo de
+    tiempo. $$\Delta r = r_f - r_i$$
+    <strong>Velocidad</strong>: rapidez con la que cambia la posición respecto
+    al tiempo.
+    {String.raw`$$v = \frac{\Delta r}{\Delta t}$$`}
+    <strong>Aceleración</strong>: rapidez con la que cambia la velocidad
+    respecto al tiempo.
+    {String.raw`$$a = \frac{\Delta v}{\Delta t}$$`}
+  </Tarjeta>
+
+  <Seccion titulo="Unidades" acento="naranja">
+    <p>
+      Para medir el movimiento necesitamos unidades. El <strong>SI</strong> define
+      las fundamentales de longitud, masa y tiempo.
+    </p>
+  </Seccion>
+
+  <ul>
+    <li><strong>Metro</strong> (m): longitud.</li>
+    <li><strong>Kilogramo</strong> (kg): masa.</li>
+    <li><strong>Segundo</strong> (s): tiempo.</li>
+  </ul>
+  <p>
+    La <strong>dimensión</strong> es la naturaleza de una cantidad, sin importar la
+    unidad usada. El <strong>análisis dimensional</strong> consiste en verificar que
+    una ecuación tenga dimensiones consistentes.
+  </p>
+  <p>
+    En una <strong>conversión de unidades</strong>, las unidades se cancelan
+    algebraicamente como factores:
+  </p>
+  <Tarjeta titulo="Ejemplo" acento="naranja">
+    {
+      String.raw`$$5\text{ manos} = (5\text{ manos})\left(\frac{12.3\text{ cm}}{1\text{ mano}}\right) = 61.5\text{ cm}$$`
+    }
+  </Tarjeta>
+
+  <Seccion titulo="Movimiento rectilíneo" acento="azulUaslp">
+    <p>Movimiento en línea recta, con velocidad o aceleración constante.</p>
+  </Seccion>
+
+  <Etiqueta colorFondo="azulUaslp">MRU</Etiqueta>
+  <p>
+    En el <strong>movimiento rectilíneo uniforme</strong> (MRU) la velocidad permanece
+    constante, es decir, no hay aceleración. La posición varía linealmente con el
+    tiempo:
+  </p>
+  <p>$$r = vt + r_0$$</p>
+  <Etiqueta colorFondo="azulUaslp">MRUA</Etiqueta>
+  <p>
+    En el <strong>movimiento rectilíneo uniformemente acelerado</strong> (MRUA) la
+    aceleración permanece constante. La velocidad varía linealmente con el tiempo
+    y la posición de forma cuadrática:
+  </p>
+  <p>
+    {String.raw`$$v = v_0 + at \qquad r = \frac{1}{2}at^2 + v_0t + r_0$$`}
+  </p>
+  <Tarjeta titulo="Caída libre" acento="azulUaslp">
+    Caso particular de MRUA con $a = -g$, donde {
+      String.raw`$g \approx 9.8\text{ m/s}^2$`
+    }.
+  </Tarjeta>
+
+  <Seccion titulo="Tiro parabólico" acento="azul">
+    <p>
+      Movimiento con velocidad inicial $v_0$ a un ángulo $\theta$ sobre la
+      horizontal.
+    </p>
+  </Seccion>
+
+  <p>
+    Los ejes $x$ y $y$ son <em>independientes</em>: en $x$ hay MRU y en $y$ hay
+    MRUA con $a = -g$.
+  </p>
+  <ul>
+    <li>
+      <strong>Eje $x$</strong>:
+      {String.raw`$v_{0x} = v_0\cos\theta, \quad x = x_0 + v_{0x}t$`}
+    </li>
+    <li>
+      <strong>Eje $y$</strong>:
+      {
+        String.raw`$v_{0y} = v_0\sin\theta, \quad y = y_0 + v_{0y}t - \frac{1}{2}gt^2, \quad v_y = v_{0y} - gt$`
+      }
+    </li>
+  </ul>
+  <p>De estas ecuaciones se obtienen tres resultados útiles:</p>
+  <Tarjeta acento="azul" titulo="ecuaciones tiro parabolico">
+    Tiempo de vuelo: {String.raw`$t_\text{vuelo} = \dfrac{2v_{0y}}{g}$`}
+    <br />
+    Alcance máximo: {String.raw`$R = \dfrac{v_0^2\sin(2\theta)}{g}$`}
+    <br />
+    Altura máxima: {String.raw`$h_\text{max} = \dfrac{v_{0y}^2}{2g}$`}
+  </Tarjeta>
+
+  <Seccion titulo="Leyes de Newton" acento="verde">
+    <p>
+      Una <strong>fuerza</strong> es una interacción capaz de cambiar el estado de
+      movimiento de un cuerpo. Se mide en newtons: {
+        String.raw`$1\text{ N} = 1\text{ kg}\cdot\text{m/s}^2$`
+      }.
+    </p>
+  </Seccion>
+
+  <p>
+    <strong>Primera ley (inercia).</strong> Todo cuerpo persevera en su estado de
+    reposo o movimiento uniforme y rectilíneo, a no ser que sea obligado a cambiar
+    dicho estado por fuerzas impresas sobre él. Válida solo en marcos de referencia
+    inerciales.
+  </p>
+
+  <p>
+    <strong>Segunda ley.</strong> La aceleración de un cuerpo es proporcional a la
+    fuerza neta ejercida sobre él, e inversamente proporcional a su masa:
+  </p>
+  <p>$$\sum F = ma$$</p>
+  <p>
+    Un caso importante es el <strong>peso</strong>, la fuerza con la que la
+    gravedad atrae a un cuerpo: $W = mg$.
+  </p>
+
+  <p>
+    <strong>Tercera ley.</strong> Las acciones mutuas entre dos cuerpos son siempre
+    iguales y están dirigidas en sentidos opuestos:
+  </p>
+  <p>{String.raw`$$F_{12} = -F_{21}$$`}</p>
+
+  <Seccion titulo="Conservación del momento" acento="dorado">
+    <p>El momento de una partícula se define como $p = mv$.</p>
+  </Seccion>
+
+  <p>
+    Si no hay fuerzas externas, la suma de los momentos de un número de
+    partículas permanece constante:
+  </p>
+  <Tarjeta titulo="Conservación" acento="dorado" colorTitulo="crema">
+    {String.raw`$$m_1v_1 + m_2v_2 + \dots = \text{una constante}$$`}
+  </Tarjeta>
+</Tema>

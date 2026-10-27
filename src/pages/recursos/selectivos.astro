@@ -7,6 +7,9 @@ import Tarjeta from "../../components/Tarjeta.astro";
 export const titulo = "Exámenes Selectivos Pasados";
 export const descripcion =
   "Aquí encontrarás los exámenes selectivos de ediciones anteriores de la Olimpiada Potosina de Física. Estudiarlos es una de las formas más efectivas de prepararte, ya que te permiten familiarizarte con el formato, el nivel de dificultad y los temas que se evalúan.";
+
+const downloadUrl = (id: string) =>
+  `https://drive.google.com/uc?export=download&id=${id}`;
 ---
 
 <Layout>
@@ -23,13 +26,13 @@ export const descripcion =
           <p>Exámenes del proceso selectivo de la edición 2025.</p>
           <div class="botones">
             <Etiqueta
-              href="/selectivos/1er-Selectivo-OPF-2025.pdf"
+              href={downloadUrl("1o1vGjT1t4ZUL-fuoP1kogFXuHXd_QzA_")}
               colorFondo="azul"
             >
               Primer Selectivo
             </Etiqueta>
             <Etiqueta
-              href="/selectivos/2ndo-Selectivo-OPF-2025.pdf"
+              href={downloadUrl("1dDTp0KFIZJzYFQq7HhiTMaWQB0t_Zyes")}
               colorFondo="azul"
             >
               Segundo Selectivo
@@ -42,13 +45,13 @@ export const descripcion =
         <div class="card-content">
           <p>Exámenes del proceso selectivo de la presente edición 2026.</p>
           <Etiqueta
-            href="/selectivos/1er-Selectivo-OPF-2026.pdf"
+            href={downloadUrl("1_mvoIUdVXTlGJC-KhyStv98H2TG9pcAA")}
             colorFondo="verde"
           >
             Primer Selectivo
           </Etiqueta>
           <Etiqueta
-            href="/selectivos/2ndo-Selectivo-OPF-2026.pdf"
+            href={downloadUrl("1tYFKaKQqg6Ry1LEHVFKtA0Q6L0wh0ufM")}
             colorFondo="verde"
           >
             Segundo Selectivo
