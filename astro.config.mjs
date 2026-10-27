@@ -7,6 +7,7 @@ export default defineConfig({
     base: '/',
     output: 'static',
     prefetch: true,
+    compressHTML: true,
     fonts: [{
         provider: fontProviders.local(),
         name: "NewCM",

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.1",
-    "astro": "^6.1.6",
+    "astro": "^7.4.2",
     "motion": "^12.38.0"
   },
   "devDependencies": {
